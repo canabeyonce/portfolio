@@ -1,18 +1,20 @@
 export const projects = [
   {
     title: "Absolute Resilience Dashboard",
+    category: "Security Dashboard",
     company: "Absolute Software",
     period: "2023 – 2025",
     description:
-      "React-based enterprise security dashboard for endpoint monitoring, security workflows, and device management. Built reusable UI components, integrated REST APIs, and improved consistency across complex product modules.",
+      "Enterprise dashboard for endpoint monitoring, security workflows, and device management using reusable React components and REST APIs.",
     technologies: ["React", "Redux", "Material UI", "REST APIs"],
   },
   {
     title: "Absolute Enterprise PWA",
+    category: "Progressive Web App",
     company: "Absolute Software",
     period: "2019 – 2023",
     description:
-      "Mobile-first Progressive Web Application supporting device search, status tracking, and freeze/unfreeze workflows across desktop and mobile experiences.",
+      "Mobile-first PWA supporting device search, status tracking, and freeze/unfreeze workflows across desktop and mobile.",
     technologies: [
       "React",
       "JavaScript",
@@ -23,10 +25,11 @@ export const projects = [
   },
   {
     title: "Workforce Management System",
+    category: "Workforce Platform",
     company: "NashTech",
     period: "2018 – 2019",
     description:
-      "Workforce management platform for the aged care industry in Australia. Built React-based features, resolved production issues, and supported testing, deployment, and maintenance.",
+      "Workforce management platform for aged care teams in Australia, covering React features, production support, testing, and deployment.",
     technologies: [
       "React",
       "Redux",
@@ -38,10 +41,11 @@ export const projects = [
   },
   {
     title: "FICO Adeptra",
+    category: "Financial SaaS",
     company: "Harvey Nash Vietnam",
     period: "2015 – 2018",
     description:
-      "SaaS platform for financial institutions supporting customer engagement, fraud prevention, debt collection, and marketing communications for clients such as Visa, MasterCard, ANZ, US Bank, Telstra, and Vodafone.",
+      "SaaS platform for financial institutions supporting customer engagement, fraud prevention, debt collection, and marketing communications.",
     technologies: [
       "JavaScript",
       "Java",

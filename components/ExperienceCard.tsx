@@ -14,19 +14,25 @@ export default function ExperienceCard({
   technologies,
 }: ExperienceCardProps) {
   return (
-    <div className="rounded-xl border border-gray-200 p-6">
-      <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+    <article className="border-b border-white/10 py-8">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-xl font-semibold">{title}</h3>
-          <p className="text-gray-600">{company}</p>
+          <h3 className="text-2xl font-bold text-[#f5f0e8]">{title}</h3>
+          <p className="mt-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#d9a441]">
+            {company}
+          </p>
         </div>
 
-        <p className="text-sm text-gray-500">{period}</p>
+        <p className="text-sm font-medium text-[#8f867a]">{period}</p>
       </div>
 
-      <p className="text-gray-700">{description}</p>
+      <p className="max-w-3xl text-base leading-7 text-[#c9c1b6]">
+        {description}
+      </p>
 
-      <p className="mt-4 text-sm text-gray-500">{technologies.join(" • ")}</p>
-    </div>
+      <p className="mt-5 text-sm font-medium text-[#8f867a]">
+        {technologies.join(" / ")}
+      </p>
+    </article>
   );
 }

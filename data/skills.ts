@@ -25,6 +25,6 @@ export const skillGroups = [
   },
   {
     title: "Platforms",
-    skills: ["WordPress", "CMS", "PWA", "REST APIs"],
+    skills: ["PWA", "REST APIs", "WordPress", "CMS"],
   },
 ];
