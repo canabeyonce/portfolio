@@ -4,17 +4,30 @@ export const projects = [
     category: "Security Dashboard",
     company: "Absolute Software",
     period: "2023 – 2025",
-    description:
-      "Enterprise dashboard for endpoint monitoring, security workflows, and device management using reusable React components and REST APIs.",
+    logoSrc: "/logos/absolute-software.png",
+    overview:
+      "Enterprise dashboard for endpoint monitoring, security workflows, and device management. The project focused on reusable React UI patterns and API-driven workflows for security operations.",
+    keyContributions: [
+      "Built reusable React UI components",
+      "Integrated REST API-driven workflows",
+      "Supported device monitoring and management experiences",
+    ],
     technologies: ["React", "Redux", "Material UI", "REST APIs"],
+    caseStudyHref: "#",
   },
   {
     title: "Absolute Enterprise PWA",
     category: "Progressive Web App",
     company: "Absolute Software",
     period: "2019 – 2023",
-    description:
-      "Mobile-first PWA supporting device search, status tracking, and freeze/unfreeze workflows across desktop and mobile.",
+    logoSrc: "/logos/absolute-software.png",
+    overview:
+      "Mobile-first progressive web app for device search, status tracking, and freeze/unfreeze workflows. The experience supported responsive use across desktop and mobile for endpoint management tasks.",
+    keyContributions: [
+      "Built responsive PWA screens",
+      "Implemented device search and status flows",
+      "Supported freeze and unfreeze workflows",
+    ],
     technologies: [
       "React",
       "JavaScript",
@@ -22,14 +35,21 @@ export const projects = [
       "REST APIs",
       "Responsive Design",
     ],
+    caseStudyHref: "#",
   },
   {
     title: "Workforce Management System",
     category: "Workforce Platform",
     company: "NashTech",
     period: "2018 – 2019",
-    description:
-      "Workforce management platform for aged care teams in Australia, covering React features, production support, testing, and deployment.",
+    logoSrc: "/logos/nashtech.png",
+    overview:
+      "Workforce management platform for aged care teams in Australia. The work included React feature development, production support, testing, and deployment across a full product lifecycle.",
+    keyContributions: [
+      "Developed React product features",
+      "Supported testing and production releases",
+      "Styled responsive interfaces with SASS",
+    ],
     technologies: [
       "React",
       "Redux",
@@ -38,14 +58,21 @@ export const projects = [
       "PostgreSQL",
       "SASS",
     ],
+    caseStudyHref: "#",
   },
   {
     title: "FICO Adeptra",
     category: "Financial SaaS",
     company: "Harvey Nash Vietnam",
     period: "2015 – 2018",
-    description:
-      "SaaS platform for financial institutions supporting customer engagement, fraud prevention, debt collection, and marketing communications.",
+    logoSrc: "/logos/harvey-nash.png",
+    overview:
+      "SaaS platform for financial institutions supporting customer engagement, fraud prevention, debt collection, and marketing communications. The work contributed to configurable communication workflows for financial institution use cases.",
+    keyContributions: [
+      "Developed JavaScript application features",
+      "Worked with XML and XSLT configuration",
+      "Supported financial workflow integrations",
+    ],
     technologies: [
       "JavaScript",
       "Java",
@@ -54,5 +81,6 @@ export const projects = [
       "XSLT",
       "FICO Decision Engine",
     ],
+    caseStudyHref: "#",
   },
 ];

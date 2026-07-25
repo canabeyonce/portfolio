@@ -1,10 +1,15 @@
+import Image from "next/image";
+
 type ProjectCardProps = {
   title: string;
   category: string;
   company: string;
   period: string;
-  description: string;
+  overview: string;
+  keyContributions: string[];
   technologies: string[];
+  logoSrc?: string;
+  caseStudyHref?: string;
   index?: number;
 };
 
@@ -20,33 +25,63 @@ export default function ProjectCard({
   category,
   company,
   period,
-  description,
+  overview,
+  keyContributions,
   technologies,
+  logoSrc,
+  caseStudyHref = "#",
   index = 0,
 }: ProjectCardProps) {
   const visualStyle = visualStyles[index % visualStyles.length];
+  const initials = company
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-md border border-[color:var(--site-border)] bg-[var(--site-card-strong)]">
       <div
-        className={`relative min-h-44 overflow-hidden bg-gradient-to-br ${visualStyle} sm:min-h-52`}
+        className={`relative min-h-52 overflow-hidden bg-gradient-to-br ${visualStyle}`}
       >
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.12)_1px,transparent_1px)] bg-[size:48px_48px] opacity-30" />
-        <span className="absolute left-5 top-5 rounded-md border border-white/20 bg-black/20 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white">
-          {category}
-        </span>
-        <div className="absolute inset-x-5 bottom-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
-            {company}
-          </p>
-          <h3 className="mt-2 max-w-sm text-2xl font-black leading-tight text-white">
-            {title}
-          </h3>
+        <div className="absolute inset-0 flex flex-col justify-between p-5">
+          <div className="flex items-start justify-between gap-4">
+            <span className="rounded-md border border-white/20 bg-black/20 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white">
+              {category}
+            </span>
+
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/20 bg-white/90 p-2 text-sm font-black text-[#151515] shadow-lg shadow-black/20">
+              {logoSrc ? (
+                <Image
+                  src={logoSrc}
+                  alt={`${company} logo`}
+                  width={96}
+                  height={96}
+                  className="max-h-full w-full object-contain"
+                />
+              ) : (
+                <span aria-label={`${company} logo placeholder`}>
+                  {initials}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+              {company}
+            </p>
+            <h3 className="mt-2 max-w-lg text-2xl font-black leading-tight text-white sm:text-3xl">
+              {title}
+            </h3>
+          </div>
         </div>
       </div>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="mb-5 grid grid-cols-2 gap-3 border-b border-[color:var(--site-border)] pb-5 text-sm">
+        <div className="mb-5 grid gap-3 border-b border-[color:var(--site-border)] pb-5 text-sm sm:grid-cols-2">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
               Company
@@ -63,8 +98,22 @@ export default function ProjectCard({
         </div>
 
         <p className="text-base leading-7 text-[var(--site-muted)]">
-          {description}
+          {overview}
         </p>
+
+        <div className="mt-6">
+          <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--site-accent)]">
+            Key Contributions
+          </h4>
+          <ul className="mt-3 space-y-2 text-sm leading-6 text-[var(--site-muted)]">
+            {keyContributions.slice(0, 3).map((contribution) => (
+              <li key={contribution} className="flex gap-3">
+                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--site-accent)]" />
+                <span>{contribution}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div className="mt-auto flex flex-wrap gap-2 pt-6">
           {technologies.map((tech) => (
@@ -76,6 +125,13 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
+
+        <a
+          href={caseStudyHref}
+          className="mt-6 inline-flex min-h-11 w-fit items-center justify-center rounded-md border border-[color:var(--site-border-strong)] px-4 text-sm font-bold text-[var(--site-fg)] transition hover:border-[color:var(--site-accent)] hover:text-[var(--site-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
+        >
+          View Case Study <span aria-hidden="true" className="ml-2">-&gt;</span>
+        </a>
       </div>
     </article>
   );

@@ -196,8 +196,11 @@ export default function Home() {
                 category={project.category}
                 period={project.period}
                 company={project.company}
-                description={project.description}
+                overview={project.overview}
+                keyContributions={project.keyContributions}
                 technologies={project.technologies}
+                logoSrc={project.logoSrc}
+                caseStudyHref={project.caseStudyHref}
                 index={index}
               />
             ))}
