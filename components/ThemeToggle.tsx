@@ -5,9 +5,27 @@ import { useEffect, useState } from "react";
 type Theme = "dark" | "light";
 
 const STORAGE_KEY = "portfolio-theme";
+const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
 
 function isTheme(value: string | null | undefined): value is Theme {
   return value === "dark" || value === "light";
+}
+
+function getStoredTheme() {
+  const storedTheme = window.localStorage.getItem(STORAGE_KEY);
+
+  return isTheme(storedTheme) ? storedTheme : null;
+}
+
+function getSystemTheme(mediaQuery?: MediaQueryList): Theme {
+  const prefersDark =
+    mediaQuery?.matches ?? window.matchMedia(COLOR_SCHEME_QUERY).matches;
+
+  return prefersDark ? "dark" : "light";
+}
+
+function getResolvedTheme(mediaQuery?: MediaQueryList): Theme {
+  return getStoredTheme() ?? getSystemTheme(mediaQuery);
 }
 
 function applyTheme(theme: Theme) {
@@ -16,40 +34,55 @@ function applyTheme(theme: Theme) {
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem(STORAGE_KEY);
-    const documentTheme = document.documentElement.dataset.theme;
-    const activeTheme = isTheme(storedTheme)
-      ? storedTheme
-      : isTheme(documentTheme)
-        ? documentTheme
-        : "dark";
+    const mediaQuery = window.matchMedia(COLOR_SCHEME_QUERY);
 
-    applyTheme(activeTheme);
-    setTheme(activeTheme);
+    function syncTheme() {
+      const activeTheme = getResolvedTheme(mediaQuery);
+
+      applyTheme(activeTheme);
+      setTheme(activeTheme);
+    }
+
+    function handleSystemThemeChange() {
+      if (!getStoredTheme()) {
+        syncTheme();
+      }
+    }
+
+    syncTheme();
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    };
   }, []);
 
-  const nextTheme = theme === "dark" ? "light" : "dark";
-  const label = `Switch to ${nextTheme} theme`;
+  const activeTheme = theme ?? "dark";
+  const nextTheme = activeTheme === "dark" ? "light" : "dark";
+  const label = theme ? `Switch to ${nextTheme} theme` : "Toggle color theme";
 
   function handleToggle() {
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
-    window.localStorage.setItem(STORAGE_KEY, nextTheme);
+    const currentTheme = theme ?? getResolvedTheme();
+    const selectedTheme = currentTheme === "dark" ? "light" : "dark";
+
+    setTheme(selectedTheme);
+    applyTheme(selectedTheme);
+    window.localStorage.setItem(STORAGE_KEY, selectedTheme);
   }
 
   return (
     <button
       type="button"
       aria-label={label}
-      aria-pressed={theme === "light"}
+      aria-pressed={theme ? theme === "light" : undefined}
       title={label}
       onClick={handleToggle}
       className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[color:var(--site-border-strong)] bg-[var(--site-chip-bg)] text-[var(--site-fg)] transition hover:border-[color:var(--site-accent)] hover:text-[var(--site-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
     >
-      {theme === "dark" ? (
+      {activeTheme === "dark" ? (
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"

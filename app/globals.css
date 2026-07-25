@@ -53,6 +53,34 @@
   color-scheme: light;
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --background: #f7f3ed;
+    --foreground: #15120d;
+    --site-bg: #f7f3ed;
+    --site-panel: #eee6da;
+    --site-card: #fffaf2;
+    --site-card-strong: #fffaf2;
+    --site-border: rgb(30 22 12 / 0.14);
+    --site-border-strong: rgb(30 22 12 / 0.22);
+    --site-fg: #15120d;
+    --site-heading: #17110a;
+    --site-muted: #594f44;
+    --site-subtle: #6c6257;
+    --site-dim: #81776c;
+    --site-chip-fg: #2b251e;
+    --site-chip-bg: rgb(30 22 12 / 0.06);
+    --site-chip-hover: rgb(30 22 12 / 0.1);
+    --site-header-bg: rgb(247 243 237 / 0.82);
+    --site-floating-bg: rgb(255 250 242 / 0.9);
+    --site-accent: #9b6713;
+    --site-accent-contrast: #fffaf2;
+    --button-primary-bg: #15120d;
+    --button-primary-fg: #fffaf2;
+    color-scheme: light;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
