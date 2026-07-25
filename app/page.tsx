@@ -1,7 +1,9 @@
+import BackToTopButton from "@/components/BackToTopButton";
 import ExperienceCard from "@/components/ExperienceCard";
 import ProjectCard from "@/components/ProjectCard";
 import SectionTitle from "@/components/SectionTitle";
 import SkillBadge from "@/components/SkillBadge";
+import ThemeToggle from "@/components/ThemeToggle";
 import { experiences } from "@/data/experiences";
 import { projects } from "@/data/projects";
 import { skillGroups } from "@/data/skills";
@@ -51,49 +53,53 @@ const profileFacts = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#090909] text-[#f5f0e8]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#090909]/90 backdrop-blur-xl">
+    <>
+      <header className="fixed left-0 right-0 top-0 z-[100] border-b border-[color:var(--site-border)] bg-[var(--site-header-bg)] backdrop-blur-md transition-colors duration-300">
         <nav
           aria-label="Primary navigation"
           className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between lg:px-8"
         >
           <a
             href="#home"
-            className="text-sm font-semibold uppercase tracking-[0.24em] text-[#f5f0e8]"
+            className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-fg)] transition hover:text-[var(--site-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--site-accent)]"
           >
             Katie Hoang
           </a>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#b8b1a6]">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-[#f5f0e8]"
-              >
-                {item.label}
-              </a>
-            ))}
+          <div className="flex flex-wrap items-center gap-3 sm:justify-end">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[var(--site-subtle)]">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-[var(--site-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--site-accent)]"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <ThemeToggle />
           </div>
         </nav>
       </header>
 
+      <main className="min-h-screen overflow-hidden bg-[var(--site-bg)] pt-[var(--header-offset)] text-[var(--site-fg)] transition-colors duration-300">
       <section
         id="home"
-        className="mx-auto grid min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)] scroll-mt-24 gap-12 px-5 pb-20 pt-16 sm:pt-20 lg:grid-cols-[minmax(0,1.15fr)_420px] lg:px-8 lg:pb-28 lg:pt-24"
+        className="mx-auto grid min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)] gap-12 px-5 pb-20 pt-16 sm:pt-20 lg:grid-cols-[minmax(0,1.15fr)_380px] lg:px-8 lg:pb-28 lg:pt-24"
       >
         <div className="flex min-w-0 max-w-[22rem] flex-col justify-center sm:max-w-none">
-          <p className="mb-5 text-xs font-semibold uppercase leading-6 tracking-[0.22em] text-[#d9a441] sm:text-sm sm:tracking-[0.26em]">
+          <p className="mb-5 text-xs font-semibold uppercase leading-6 tracking-[0.22em] text-[var(--site-accent)] sm:text-sm sm:tracking-[0.26em]">
             <span>Frontend Engineer</span>
             <span className="hidden sm:inline"> / </span>
             <span className="block sm:inline">Kansas City, MO</span>
           </p>
 
-          <h1 className="max-w-full text-[2.85rem] font-black leading-[0.92] tracking-normal text-[#f8f3ea] sm:text-7xl lg:max-w-5xl lg:text-[7.5rem]">
+          <h1 className="max-w-full text-[2.85rem] font-black leading-[0.92] tracking-normal text-[var(--site-heading)] sm:text-7xl lg:max-w-5xl lg:text-[7.5rem]">
             Katie Hoang
           </h1>
 
-          <p className="mt-8 max-w-full text-lg leading-8 text-[#c9c1b6] sm:max-w-2xl sm:text-xl">
+          <p className="mt-8 max-w-full text-lg leading-8 text-[var(--site-muted)] sm:max-w-2xl sm:text-xl">
             Frontend Engineer with 10 years of experience building enterprise
             React applications, reusable UI components, and responsive web
             platforms.
@@ -103,7 +109,7 @@ export default function Home() {
             {profileFacts.map((fact) => (
               <span
                 key={fact}
-                className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-[#e8dfd2]"
+                className="rounded-md border border-[color:var(--site-border)] bg-[var(--site-chip-bg)] px-4 py-2 text-sm font-medium text-[var(--site-chip-fg)]"
               >
                 {fact}
               </span>
@@ -123,8 +129,8 @@ export default function Home() {
                 }
                 className={
                   action.primary
-                    ? "inline-flex min-h-12 items-center justify-center rounded-md bg-[#f5f0e8] px-5 text-sm font-bold text-[#090909] transition hover:bg-[#d9a441]"
-                    : "inline-flex min-h-12 items-center justify-center rounded-md border border-white/15 px-5 text-sm font-bold text-[#f5f0e8] transition hover:border-[#d9a441] hover:text-[#d9a441]"
+                    ? "inline-flex min-h-12 items-center justify-center rounded-md bg-[var(--button-primary-bg)] px-5 text-sm font-bold text-[var(--button-primary-fg)] transition hover:bg-[var(--site-accent)] hover:text-[var(--site-accent-contrast)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
+                    : "inline-flex min-h-12 items-center justify-center rounded-md border border-[color:var(--site-border-strong)] px-5 text-sm font-bold text-[var(--site-fg)] transition hover:border-[color:var(--site-accent)] hover:text-[var(--site-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
                 }
               >
                 {action.label}
@@ -134,10 +140,10 @@ export default function Home() {
         </div>
 
         <aside
-          className="relative min-w-0 max-w-[22rem] sm:max-w-full lg:self-end"
+          className="relative min-w-0 max-w-[22rem] sm:max-w-full lg:max-w-[380px] lg:self-end"
           aria-label="Katie Hoang profile"
         >
-          <div className="w-full max-w-full overflow-hidden rounded-md border border-white/10 bg-[#151515] shadow-2xl shadow-black/40">
+          <div className="w-full max-w-full overflow-hidden rounded-md border border-[color:var(--site-border)] bg-[var(--site-card)] shadow-2xl shadow-black/30">
             <Image
               src="/avatar.jpg"
               alt="Katie Hoang"
@@ -149,20 +155,20 @@ export default function Home() {
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="rounded-md border border-white/10 bg-[#151515] p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-[#8f867a]">
+            <div className="rounded-md border border-[color:var(--site-border)] bg-[var(--site-card)] p-4">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--site-dim)]">
                 Focus
               </p>
-              <p className="mt-2 text-sm font-semibold text-[#f5f0e8]">
+              <p className="mt-2 text-sm font-semibold text-[var(--site-fg)]">
                 Enterprise UI
               </p>
             </div>
 
-            <div className="rounded-md border border-white/10 bg-[#151515] p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-[#8f867a]">
+            <div className="rounded-md border border-[color:var(--site-border)] bg-[var(--site-card)] p-4">
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--site-dim)]">
                 Stack
               </p>
-              <p className="mt-2 text-sm font-semibold text-[#f5f0e8]">
+              <p className="mt-2 text-sm font-semibold text-[var(--site-fg)]">
                 React, TypeScript
               </p>
             </div>
@@ -172,11 +178,11 @@ export default function Home() {
 
       <section
         id="projects"
-        className="scroll-mt-24 border-t border-white/10 bg-[#10100f] px-5 py-20 lg:px-8 lg:py-28"
+        className="border-t border-[color:var(--site-border)] bg-[var(--site-panel)] px-5 py-20 lg:px-8 lg:py-28"
       >
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-3xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#d9a441]">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-accent)]">
               Featured projects
             </p>
             <SectionTitle>Frontend work across enterprise products</SectionTitle>
@@ -201,17 +207,17 @@ export default function Home() {
 
       <section
         id="experience"
-        className="scroll-mt-24 border-t border-white/10 px-5 py-20 lg:px-8 lg:py-28"
+        className="border-t border-[color:var(--site-border)] px-5 py-20 lg:px-8 lg:py-28"
       >
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[360px_1fr]">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#d9a441]">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-accent)]">
               Experience
             </p>
             <SectionTitle>Frontend engineering experience</SectionTitle>
           </div>
 
-          <div className="space-y-0 border-t border-white/10">
+          <div className="space-y-0 border-t border-[color:var(--site-border)]">
             {experiences.map((experience) => (
               <ExperienceCard
                 key={`${experience.company}-${experience.period}`}
@@ -226,10 +232,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-[#10100f] px-5 py-20 lg:px-8 lg:py-28">
+      <section className="border-t border-[color:var(--site-border)] bg-[var(--site-panel)] px-5 py-20 lg:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[360px_1fr]">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#d9a441]">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-accent)]">
               Skills
             </p>
             <SectionTitle>Frontend tools and platforms</SectionTitle>
@@ -238,7 +244,7 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-2">
             {skillGroups.map((group) => (
               <div key={group.title}>
-                <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#8f867a]">
+                <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--site-dim)]">
                   {group.title}
                 </h3>
 
@@ -253,31 +259,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 px-5 py-20 lg:px-8 lg:py-28">
+      <section className="border-t border-[color:var(--site-border)] px-5 py-20 lg:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[360px_1fr]">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#d9a441]">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-accent)]">
               Education
             </p>
             <SectionTitle>Academic foundation</SectionTitle>
           </div>
 
-          <div className="border-t border-white/10 py-8">
+          <div className="border-t border-[color:var(--site-border)] py-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h3 className="text-2xl font-bold text-[#f5f0e8]">
+                <h3 className="text-2xl font-bold text-[var(--site-fg)]">
                   Bachelor of Computer Software Engineering
                 </h3>
 
-                <p className="mt-2 text-[#c9c1b6]">
+                <p className="mt-2 text-[var(--site-muted)]">
                   VNUHCM - University of Science
                 </p>
               </div>
 
               <div className="text-left sm:text-right">
-                <p className="text-[#c9c1b6]">Ho Chi Minh City, Vietnam</p>
+                <p className="text-[var(--site-muted)]">Ho Chi Minh City, Vietnam</p>
 
-                <p className="mt-1 text-sm text-[#8f867a]">
+                <p className="mt-1 text-sm text-[var(--site-dim)]">
                   Sep 2008 - Sep 2013
                 </p>
               </div>
@@ -288,17 +294,17 @@ export default function Home() {
 
       <section
         id="contact"
-        className="scroll-mt-24 border-t border-white/10 bg-[#10100f] px-5 py-20 text-[#f5f0e8] lg:px-8 lg:py-24"
+        className="border-t border-[color:var(--site-border)] bg-[var(--site-panel)] px-5 py-20 text-[var(--site-fg)] lg:px-8 lg:py-24"
       >
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_520px] lg:items-end">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#d9a441]">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--site-accent)]">
               Contact
             </p>
             <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-normal sm:text-6xl">
               Open to frontend engineering opportunities.
             </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#c9c1b6]">
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--site-muted)]">
               Based in Kansas City, Missouri, and available to connect about
               frontend roles and product engineering teams.
             </p>
@@ -315,20 +321,20 @@ export default function Home() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="group flex min-h-16 items-center justify-between gap-4 rounded-md border border-white/10 bg-white/[0.04] px-5 py-4 transition hover:border-[#d9a441] hover:bg-white/[0.07]"
+                className="group flex min-h-16 items-center justify-between gap-4 rounded-md border border-[color:var(--site-border)] bg-[var(--site-chip-bg)] px-5 py-4 transition hover:border-[color:var(--site-accent)] hover:bg-[var(--site-chip-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
               >
                 <span>
-                  <span className="block text-sm font-bold uppercase tracking-[0.18em] text-[#d9a441]">
+                  <span className="block text-sm font-bold uppercase tracking-[0.18em] text-[var(--site-accent)]">
                     {action.label}
                   </span>
-                  <span className="mt-1 block break-all text-sm text-[#c9c1b6] sm:text-base">
+                  <span className="mt-1 block break-all text-sm text-[var(--site-muted)] sm:text-base">
                     {action.value}
                   </span>
                 </span>
 
                 <span
                   aria-hidden="true"
-                  className="text-xl text-[#8f867a] transition group-hover:translate-x-1 group-hover:text-[#d9a441]"
+                  className="text-xl text-[var(--site-dim)] transition group-hover:translate-x-1 group-hover:text-[var(--site-accent)]"
                 >
                   -&gt;
                 </span>
@@ -337,6 +343,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+      <BackToTopButton />
+      </main>
+    </>
   );
 }

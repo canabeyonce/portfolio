@@ -27,7 +27,7 @@ export default function ProjectCard({
   const visualStyle = visualStyles[index % visualStyles.length];
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-md border border-white/10 bg-[#171716]">
+    <article className="flex h-full flex-col overflow-hidden rounded-md border border-[color:var(--site-border)] bg-[var(--site-card-strong)]">
       <div
         className={`relative min-h-44 overflow-hidden bg-gradient-to-br ${visualStyle} sm:min-h-52`}
       >
@@ -46,29 +46,31 @@ export default function ProjectCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="mb-5 grid grid-cols-2 gap-3 border-b border-white/10 pb-5 text-sm">
+        <div className="mb-5 grid grid-cols-2 gap-3 border-b border-[color:var(--site-border)] pb-5 text-sm">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8f867a]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
               Company
             </p>
-            <p className="mt-1 font-semibold text-[#f5f0e8]">{company}</p>
+            <p className="mt-1 font-semibold text-[var(--site-fg)]">{company}</p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8f867a]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
               Period
             </p>
-            <p className="mt-1 font-semibold text-[#f5f0e8]">{period}</p>
+            <p className="mt-1 font-semibold text-[var(--site-fg)]">{period}</p>
           </div>
         </div>
 
-        <p className="text-base leading-7 text-[#c9c1b6]">{description}</p>
+        <p className="text-base leading-7 text-[var(--site-muted)]">
+          {description}
+        </p>
 
         <div className="mt-auto flex flex-wrap gap-2 pt-6">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-[#e8dfd2]"
+              className="rounded-md border border-[color:var(--site-border)] bg-[var(--site-chip-bg)] px-3 py-1.5 text-xs font-semibold text-[var(--site-chip-fg)]"
             >
               {tech}
             </span>
