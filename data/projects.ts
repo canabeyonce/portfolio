@@ -1,26 +1,12 @@
 export const projects = [
   {
-    title: "Absolute Resilience Dashboard",
-    category: "Security Dashboard",
-    company: "Absolute Software",
-    period: "2023 – 2025",
-    logoSrc: "/logos/absolute-software.png",
-    overview:
-      "Enterprise dashboard for endpoint monitoring, security workflows, and device management. The project focused on reusable React UI patterns and API-driven workflows for security operations.",
-    keyContributions: [
-      "Built reusable React UI components",
-      "Integrated REST API-driven workflows",
-      "Supported device monitoring and management experiences",
-    ],
-    technologies: ["React", "Redux", "Material UI", "REST APIs"],
-    caseStudyHref: "#",
-  },
-  {
     title: "Absolute Enterprise PWA",
     category: "Progressive Web App",
     company: "Absolute Software",
-    period: "2019 – 2023",
-    logoSrc: "/logos/absolute-software.png",
+    role: "Frontend Engineer",
+    period: "Jun. 2023 – Aug. 2025",
+    industry: "Endpoint Management",
+    logoSrc: "/logos/abs-logo.png",
     overview:
       "Mobile-first progressive web app for device search, status tracking, and freeze/unfreeze workflows. The experience supported responsive use across desktop and mobile for endpoint management tasks.",
     keyContributions: [
@@ -35,6 +21,24 @@ export const projects = [
       "REST APIs",
       "Responsive Design",
     ],
+    caseStudyHref: "#",
+  },
+  {
+    title: "Absolute Resilience Dashboard",
+    category: "Security Dashboard",
+    company: "Absolute Software",
+    role: "Frontend Engineer",
+    period: "May 2019 – Jun. 2023",
+    industry: "Cybersecurity",
+    logoSrc: "/logos/abs-logo.png",
+    overview:
+      "Enterprise dashboard for endpoint monitoring, security workflows, and device management. The project focused on reusable React UI patterns and API-driven workflows for security operations.",
+    keyContributions: [
+      "Built reusable React UI components",
+      "Integrated REST API-driven workflows",
+      "Supported device monitoring and management experiences",
+    ],
+    technologies: ["React", "Redux", "Material UI", "REST APIs"],
     caseStudyHref: "#",
   },
   {

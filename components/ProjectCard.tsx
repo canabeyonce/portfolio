@@ -4,12 +4,13 @@ type ProjectCardProps = {
   title: string;
   category: string;
   company: string;
+  role?: string;
   period: string;
+  industry?: string;
   overview: string;
   keyContributions: string[];
   technologies: string[];
   logoSrc?: string;
-  caseStudyHref?: string;
   index?: number;
 };
 
@@ -24,12 +25,13 @@ export default function ProjectCard({
   title,
   category,
   company,
+  role,
   period,
+  industry,
   overview,
   keyContributions,
   technologies,
   logoSrc,
-  caseStudyHref = "#",
   index = 0,
 }: ProjectCardProps) {
   const visualStyle = visualStyles[index % visualStyles.length];
@@ -39,6 +41,13 @@ export default function ProjectCard({
     .join("")
     .slice(0, 2)
     .toUpperCase();
+  const isWideLogo = logoSrc?.includes("abs-logo");
+  const metadataItems = [
+    { label: "Company", value: company },
+    role ? { label: "Role", value: role } : null,
+    { label: "Period", value: period },
+    industry ? { label: "Industry", value: industry } : null,
+  ].filter((item): item is { label: string; value: string } => Boolean(item));
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-md border border-[color:var(--site-border)] bg-[var(--site-card-strong)]">
@@ -52,14 +61,18 @@ export default function ProjectCard({
               {category}
             </span>
 
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/20 bg-white/90 p-2 text-sm font-black text-[#151515] shadow-lg shadow-black/20">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[12px] border border-white/30 bg-white p-1 text-xs font-black text-[#151515] shadow-md shadow-black/15">
               {logoSrc ? (
                 <Image
                   src={logoSrc}
                   alt={`${company} logo`}
                   width={96}
                   height={96}
-                  className="max-h-full w-full object-contain"
+                  className={
+                    isWideLogo
+                      ? "h-full w-full origin-left scale-[1] object-contain object-left"
+                      : "h-full w-full scale-110 object-contain"
+                  }
                 />
               ) : (
                 <span aria-label={`${company} logo placeholder`}>
@@ -82,19 +95,16 @@ export default function ProjectCard({
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="mb-5 grid gap-3 border-b border-[color:var(--site-border)] pb-5 text-sm sm:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
-              Company
-            </p>
-            <p className="mt-1 font-semibold text-[var(--site-fg)]">{company}</p>
-          </div>
-
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
-              Period
-            </p>
-            <p className="mt-1 font-semibold text-[var(--site-fg)]">{period}</p>
-          </div>
+          {metadataItems.map((item) => (
+            <div key={item.label}>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--site-dim)]">
+                {item.label}
+              </p>
+              <p className="mt-1 font-semibold text-[var(--site-fg)]">
+                {item.value}
+              </p>
+            </div>
+          ))}
         </div>
 
         <p className="text-base leading-7 text-[var(--site-muted)]">
@@ -108,7 +118,10 @@ export default function ProjectCard({
           <ul className="mt-3 space-y-2 text-sm leading-6 text-[var(--site-muted)]">
             {keyContributions.slice(0, 3).map((contribution) => (
               <li key={contribution} className="flex gap-3">
-                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--site-accent)]" />
+                <span
+                  aria-hidden="true"
+                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--site-accent)]"
+                />
                 <span>{contribution}</span>
               </li>
             ))}
@@ -125,13 +138,6 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-
-        <a
-          href={caseStudyHref}
-          className="mt-6 inline-flex min-h-11 w-fit items-center justify-center rounded-md border border-[color:var(--site-border-strong)] px-4 text-sm font-bold text-[var(--site-fg)] transition hover:border-[color:var(--site-accent)] hover:text-[var(--site-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]"
-        >
-          View Case Study <span aria-hidden="true" className="ml-2">-&gt;</span>
-        </a>
       </div>
     </article>
   );

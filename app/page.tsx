@@ -16,8 +16,12 @@ const navItems = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
+const opensInNewTab = (href: string) =>
+  href.startsWith("http") || href === "/resume.pdf";
+
 const heroActions = [
   { label: "Contact", href: "mailto:katiehoang26390@gmail.com", primary: true },
+  { label: "Resume", href: "/resume.pdf", primary: false },
   { label: "GitHub", href: "https://github.com/canabeyonce", primary: false },
   {
     label: "LinkedIn",
@@ -31,6 +35,11 @@ const contactActions = [
     label: "Email",
     href: "mailto:katiehoang26390@gmail.com",
     value: "katiehoang26390@gmail.com",
+  },
+  {
+    label: "Resume",
+    href: "/resume.pdf",
+    value: "Open resume PDF",
   },
   {
     label: "LinkedIn",
@@ -121,9 +130,9 @@ export default function Home() {
               <a
                 key={action.label}
                 href={action.href}
-                target={action.href.startsWith("http") ? "_blank" : undefined}
+                target={opensInNewTab(action.href) ? "_blank" : undefined}
                 rel={
-                  action.href.startsWith("http")
+                  opensInNewTab(action.href)
                     ? "noopener noreferrer"
                     : undefined
                 }
@@ -196,11 +205,12 @@ export default function Home() {
                 category={project.category}
                 period={project.period}
                 company={project.company}
+                role={project.role}
+                industry={project.industry}
                 overview={project.overview}
                 keyContributions={project.keyContributions}
                 technologies={project.technologies}
                 logoSrc={project.logoSrc}
-                caseStudyHref={project.caseStudyHref}
                 index={index}
               />
             ))}
@@ -318,9 +328,9 @@ export default function Home() {
               <a
                 key={action.label}
                 href={action.href}
-                target={action.href.startsWith("http") ? "_blank" : undefined}
+                target={opensInNewTab(action.href) ? "_blank" : undefined}
                 rel={
-                  action.href.startsWith("http")
+                  opensInNewTab(action.href)
                     ? "noopener noreferrer"
                     : undefined
                 }
